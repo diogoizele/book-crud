@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+
+  background-color: #ddd;
+  color: #222;
+
+  font-family: 'Roboto', sans-serif;
+}
+
+div.container {
+  display: flex;
+
+  width: inherit;
+  height: inherit;
+
+  min-width: 1200px;
+}
+
+section.crud-sec {
+  background-color: #eee;
+  flex: 4;
+}
+
+section.crud-sec table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+section.crud-sec tr {
+    border: 2px solid;
+}
+
+section.crud-sec th {
+    background-color: #111;
+    color: #fff;
+}
+
+section.crud-sec th, section.crud-sec td {
+    text-align: start;
+    /* border: 1px solid black; */
+    padding: 4px 8px;
+}
+
+section.crud-sec tr:nth-child(even) {
+    background-color: #ccc;
+}
+
+section.crud-sec td.update, section.crud-sec td.delete {
+    border: 0px;
+    padding: 10px;
+}
+
+
+td.update {
+    font-weight: 900;
+    font-size: 30px;
+    color: rgb(0, 31, 16);
+}
+
+td.delete {
+    font-weight: 900;
+    font-size: 20px;
+    color: rgb(189, 2, 2);
+}
+
+section.manipule-sec {
+    height: 100vh;
+    flex: 3;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+section.search-sec {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px 20px 0px 40px;
+    border-bottom: 2px solid;
+}
+
+section.search-sec div.radios {
+    font-size: 20px;
+}
+
+section.search-sec div.radios label {
+    margin: 4px;
+    line-height: 40px;
+}
+
+section.search-sec div.category {
+    display: flex;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 15px;
+}
+div.category select {
+    width: 200px;
+    margin: 0px 20px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+
+section.search-sec div.search input {
+    padding: 10px;
+    width: 400px;
+    font-size: 20px;
+}
+
+section.search-sec div.search button {
+    padding: 10px;
+    width: 120px;
+    font-size: 20px;
+}
+
+section.register-sec {
+    height: 50%;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px;
+}
+
+
+section.register-sec input {
+    padding: 10px;
+    margin: 10px 0px;
+    width: 300px;
+    font-size: 20px;
+}
+
+section.register-sec  select {
+    margin-top: 10px;
+    width: 325px;
+    padding: 5px;
+    font-size: 18px;
+}
