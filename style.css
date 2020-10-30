@@ -59,9 +59,7 @@ section.crud-sec td.update, section.crud-sec td.delete {
 }
 
 td.update {
-    font-weight: 900;
     font-size: 30px;
-    color: rgb(0, 31, 16);
 }
 
 td.delete {
