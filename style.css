@@ -58,7 +58,6 @@ section.crud-sec td.update, section.crud-sec td.delete {
     padding: 10px;
 }
 
-
 td.update {
     font-weight: 900;
     font-size: 30px;
@@ -104,13 +103,13 @@ section.search-sec div.category {
     font-weight: 500;
     margin: 15px;
 }
+
 div.category select {
     width: 200px;
     margin: 0px 20px;
     padding: 10px;
     font-size: 20px;
 }
-
 
 section.search-sec div.search input {
     padding: 10px;
@@ -132,7 +131,6 @@ section.register-sec {
     align-items: flex-start;
     padding: 40px;
 }
-
 
 section.register-sec input {
     padding: 10px;
