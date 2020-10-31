@@ -1,31 +1,70 @@
 const confirmButton = document.querySelector("#confirm-btn");
 const searchButton = document.querySelector("#search-btn");
+const resetButton = document.querySelector("#reset-btn");
+
 let dataBaseArray = [];
 let line = null;
 let localData = JSON.parse(localStorage.getItem("books"));
 
-function searchBooks(info, category) {
+function searchBooks() {
+  let searchInput = document.querySelector("#search-input").value;
+
   let name = document.querySelector("#search-name").checked;
   let author = document.querySelector("#search-author").checked;
   let year = document.querySelector("#search-year").checked;
   let id = document.querySelector("#search-id").checked;
+  let category = document.querySelector("#search-category").value;
 
+  if (!searchInput && !category) {
+    alert("Você não selecionou informação nenhuma para pesquisar");
+    return;
+  }
+
+  document.querySelector("tbody").innerHTML = "";
+
+  if (category && !name && !author && !year && !id) {
+    localData.forEach((book) => {
+      if (book.category == category) {
+        createNewRegister(book);
+      }
+    });
+  }
   if (name) {
-    localData.forEach(book => console.log(book.name))
+    localData.forEach((book) => {
+      if (book.name == searchInput) {
+        createNewRegister(book);
+        console.log(book);
+      }
+    });
+  } else if (author) {
+    localData.forEach((book) => {
+      if (book.author == searchInput) {
+        createNewRegister(book);
+        console.log(book);
+      }
+    });
+  } else if (year) {
+    localData.forEach((book) => {
+      if (book.year == searchInput) {
+        createNewRegister(book);
+        console.log(book);
+      }
+    });
+  } else if (id) {
+    localData.forEach((book) => {
+      if (book.id == searchInput) {
+        createNewRegister(book);
+        console.log(book);
+      }
+    });
   }
-  if (author) {
-    localData.forEach(book => console.log(book.author))
-  }
-  if (year) {
-    localData.forEach(book => console.log(book.year))
-  }
-  if (id) {
-    localData.forEach(book => console.log(book.id))
-  }
-  console.log(name, author, year, id);
+  document.querySelector("#search-input").value = "";
+  document.querySelector("#search-name").checked = false;
+  document.querySelector("#search-author").checked = false;
+  document.querySelector("#search-year").checked = false;
+  document.querySelector("#search-id").checked = false;
+  document.querySelector("#search-category").value = "";
 }
-
-searchButton.addEventListener("click", searchBooks);
 
 // verifica se já existe um ID pra aplicação
 if (localStorage.getItem("id")) {
@@ -43,11 +82,12 @@ function handleCrudData() {
     dataBaseArray.push(book);
     localStorage.setItem("id", ++id);
   } else {
-    updateRegister(book); 
+    updateRegister(book);
   }
   document.querySelector("form").reset();
   line = null;
   setData();
+  location.reload();
 }
 
 function createNewBook() {
@@ -112,20 +152,29 @@ function getData() {
 
 function renderTable() {
   getData();
-  document.querySelector("table").getElementsByTagName("tbody").innerHTML = "";
+  if (document.querySelector("tbody")) {
+    document.querySelector("tbody").innerHTML = "";
+  }
   dataBaseArray.forEach(function (book) {
     createNewRegister(book);
   });
 }
 
+function renderDefaultTable(arr) {
+  getData();
+  if (document.querySelector("tbody")) {
+    document.querySelector("tbody").innerHTML = "";
+  }
+  arr.forEach(function (book) {
+    createNewRegister(book);
+  });
+}
+
 function createNewRegister(book) {
-  const table = document.querySelector("table");
+  const table = document.querySelector("tbody");
 
   const tr = document.createElement("tr");
   tr.setAttribute("books", "");
-
-  // const tdOrder = document.createElement("td");
-  // tdOrder.innerHTML = JSON.parse(localStorage.getItem("books")).length;
 
   const tdID = document.createElement("td");
   tdID.innerHTML = book.id;
@@ -164,5 +213,19 @@ function createNewRegister(book) {
   table.appendChild(tr);
 }
 
-renderTable();
-confirmButton.addEventListener("click", handleCrudData);
+renderTable(dataBaseArray);
+confirmButton.onclick = () => {
+  if (
+    !document.querySelector("#reg-name").value ||
+    !document.querySelector("#reg-author").value ||
+    !document.querySelector("#reg-category").value
+  ) {
+    alert('Informe os campos necessários para preencher os livros!')
+  } else {
+    handleCrudData();
+  }
+};
+searchButton.addEventListener("click", searchBooks);
+
+document.querySelector("#reset-btn").onclick = () =>
+  renderDefaultTable(dataBaseArray);
