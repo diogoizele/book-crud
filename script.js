@@ -214,13 +214,21 @@ function createNewRegister(book) {
 }
 
 renderTable(dataBaseArray);
+
+let bookNames = [];
 confirmButton.onclick = () => {
+  dataBaseArray.forEach((book) => {
+    bookNames.push(book.name);
+  });
+
   if (
     !document.querySelector("#reg-name").value ||
     !document.querySelector("#reg-author").value ||
     !document.querySelector("#reg-category").value
   ) {
-    alert('Informe os campos necessários para preencher os livros!')
+    alert("Informe os campos necessários para preencher os livros!");
+  } else if (bookNames.includes(document.querySelector("#reg-name").value)) {
+    alert("Esse livro ja foi gravado!");
   } else {
     handleCrudData();
   }
