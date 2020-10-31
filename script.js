@@ -191,11 +191,13 @@ function createNewRegister(book) {
   const tdUpdate = document.createElement("td");
   const btnUpdate = document.createElement("button");
   btnUpdate.innerHTML = "⟳";
+  btnUpdate.classList.add('update')
   tdUpdate.appendChild(btnUpdate);
 
   const tdDelete = document.createElement("td");
   const btnDelete = document.createElement("button");
-  btnDelete.innerHTML = "╳";
+  btnDelete.innerHTML = "X";
+  btnDelete.classList.add('delete')
   tdDelete.appendChild(btnDelete);
 
   btnUpdate.addEventListener("click", updateCrudData);

@@ -73,14 +73,20 @@ section.crud-sec td.delete {
   padding: 10px;
 }
 
-td.update {
-  font-size: 30px;
+td button.update {
+  font-size: 20px;
+  font-weight: 100;
+  height: 35px;
+  width: 35px;
+  border-radius: 30px;
 }
 
-td.delete {
-  font-weight: 900;
-  font-size: 20px;
-  color: rgb(189, 2, 2);
+td button.delete  {
+  background-color: none;
+  font-size: 17px;
+  height: 35px;
+  width: 35px;
+  border-radius: 30px;
 }
 
 section.manipule-sec {
