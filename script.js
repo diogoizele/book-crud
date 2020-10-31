@@ -1,6 +1,39 @@
 const confirmButton = document.querySelector("#confirm-btn");
-const dataBaseArray = [];
+const searchButton = document.querySelector("#search-btn");
+let dataBaseArray = [];
 let line = null;
+let localData = JSON.parse(localStorage.getItem("books"));
+
+function searchBooks(info, category) {
+  let name = document.querySelector("#search-name").checked;
+  let author = document.querySelector("#search-author").checked;
+  let year = document.querySelector("#search-year").checked;
+  let id = document.querySelector("#search-id").checked;
+
+  if (name) {
+    localData.forEach(book => console.log(book.name))
+  }
+  if (author) {
+    localData.forEach(book => console.log(book.author))
+  }
+  if (year) {
+    localData.forEach(book => console.log(book.year))
+  }
+  if (id) {
+    localData.forEach(book => console.log(book.id))
+  }
+  console.log(name, author, year, id);
+}
+
+searchButton.addEventListener("click", searchBooks);
+
+// verifica se já existe um ID pra aplicação
+if (localStorage.getItem("id")) {
+  var id = localStorage.getItem("id");
+} else {
+  var id = 1;
+}
+localStorage.setItem("id", id);
 
 function handleCrudData() {
   let book = createNewBook();
@@ -8,16 +41,18 @@ function handleCrudData() {
   if (line == null) {
     createNewRegister(book);
     dataBaseArray.push(book);
+    localStorage.setItem("id", ++id);
   } else {
-    updateRegister(book);
-    document.querySelector("form").reset();
-    line = null;
-    setData();
+    updateRegister(book); 
   }
+  document.querySelector("form").reset();
+  line = null;
+  setData();
 }
 
 function createNewBook() {
   let book = new Book(
+    localStorage.getItem("id"),
     document.querySelector("#reg-name").value,
     document.querySelector("#reg-author").value,
     document.querySelector("#reg-year").value,
@@ -32,21 +67,20 @@ function updateCrudData() {
   line = this.parentElement.parentElement;
   console.log(line.innerHTML);
 
-  document.querySelector("#reg-name").value = line.cells[2].innerHTML;
-  document.querySelector("#reg-author").value = line.cells[3].innerHTML;
-  document.querySelector("#reg-year").value = line.cells[5].innerHTML;
-  document.querySelector("#reg-category").value = line.cells[4].innerHTML;
+  document.querySelector("#reg-name").value = line.cells[1].innerHTML;
+  document.querySelector("#reg-author").value = line.cells[2].innerHTML;
+  document.querySelector("#reg-year").value = line.cells[4].innerHTML;
+  document.querySelector("#reg-category").value = line.cells[3].innerHTML;
 }
 
 function updateRegister(book) {
-  line.cells[2].innerHTML = book.name;
-  line.cells[3].innerHTML = book.author;
-  line.cells[4].innerHTML = book.category;
-  line.cells[5].innerHTML = book.year;
+  line.cells[1].innerHTML = book.name;
+  line.cells[2].innerHTML = book.author;
+  line.cells[3].innerHTML = book.category;
+  line.cells[4].innerHTML = book.year;
 
   let index = line.rowIndex - 1;
 
-  dataBaseArray[index].id = book.id;
   dataBaseArray[index].name = book.name;
   dataBaseArray[index].author = book.author;
   dataBaseArray[index].category = book.category;
@@ -66,7 +100,7 @@ function deleteCrudData() {
 }
 
 function setData() {
-  let data = JSON.stringify(dataBaseArray);
+  var data = JSON.stringify(dataBaseArray);
   localStorage.setItem("books", data);
 }
 
@@ -78,18 +112,20 @@ function getData() {
 
 function renderTable() {
   getData();
-  // document.querySelector("table tr[books]").innerHTML = "";
-  dataBaseArray.forEach((book) => createNewRegister(book));
+  document.querySelector("table").getElementsByTagName("tbody").innerHTML = "";
+  dataBaseArray.forEach(function (book) {
+    createNewRegister(book);
+  });
 }
 
 function createNewRegister(book) {
-  const table = document.querySelector("tbody");
+  const table = document.querySelector("table");
 
   const tr = document.createElement("tr");
-  tr.setAttribute('books', '')
+  tr.setAttribute("books", "");
 
-  const tdOrder = document.createElement("td");
-  tdOrder.innerHTML = dataBaseArray.length + 1;
+  // const tdOrder = document.createElement("td");
+  // tdOrder.innerHTML = JSON.parse(localStorage.getItem("books")).length;
 
   const tdID = document.createElement("td");
   tdID.innerHTML = book.id;
@@ -116,7 +152,7 @@ function createNewRegister(book) {
   btnUpdate.addEventListener("click", updateCrudData);
   btnDelete.addEventListener("click", deleteCrudData);
 
-  tr.appendChild(tdOrder);
+  // tr.appendChild(tdOrder);
   tr.appendChild(tdID);
   tr.appendChild(tdName);
   tr.appendChild(tdAuthor);

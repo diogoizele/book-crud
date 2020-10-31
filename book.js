@@ -1,13 +1,6 @@
-let counter = (function () {
-  let count = 0;
-  return function () {
-    return count++;
-  };
-})();
-
 class Book {
-  constructor(name, author, year, category) {
-    this.id = counter()
+  constructor(id, name, author, year, category) {
+    this.id = id;
     this.name = name;
     this.author = author;
     this.year = year;
@@ -18,4 +11,3 @@ class Book {
     return `${this.name} ${this.author} ${this.year} ${this.category}`;
   }
 }
-
