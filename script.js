@@ -191,13 +191,13 @@ function createNewRegister(book) {
   const tdUpdate = document.createElement("td");
   const btnUpdate = document.createElement("button");
   btnUpdate.innerHTML = "⟳";
-  btnUpdate.classList.add('update')
+  btnUpdate.classList.add("update");
   tdUpdate.appendChild(btnUpdate);
 
   const tdDelete = document.createElement("td");
   const btnDelete = document.createElement("button");
   btnDelete.innerHTML = "X";
-  btnDelete.classList.add('delete')
+  btnDelete.classList.add("delete");
   tdDelete.appendChild(btnDelete);
 
   btnUpdate.addEventListener("click", updateCrudData);
@@ -229,8 +229,6 @@ confirmButton.onclick = () => {
     !document.querySelector("#reg-category").value
   ) {
     alert("Informe os campos necessários para preencher os livros!");
-  } else if (bookNames.includes(document.querySelector("#reg-name").value)) {
-    alert("Esse livro ja foi gravado!");
   } else {
     handleCrudData();
   }
