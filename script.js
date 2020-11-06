@@ -19,6 +19,8 @@ function searchBooks() {
     alert("Você não selecionou informação nenhuma para pesquisar");
     return;
   }
+  let a = 'dasd'
+  a.toLowerCase
 
   document.querySelector("tbody").innerHTML = "";
 
@@ -31,14 +33,14 @@ function searchBooks() {
   }
   if (name) {
     localData.forEach((book) => {
-      if (book.name == searchInput) {
+      if (book.name.toLocaleLowerCase() == searchInput.toLowerCase()) {
         createNewRegister(book);
         console.log(book);
       }
     });
   } else if (author) {
     localData.forEach((book) => {
-      if (book.author == searchInput) {
+      if (book.author.toLocaleLowerCase() == searchInput.toLowerCase()) {
         createNewRegister(book);
         console.log(book);
       }
