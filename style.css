@@ -17,6 +17,7 @@ div.container {
   width: inherit;
   height: inherit;
   min-width: 1200px;
+  position: relative;
 }
 
 section.crud-sec {
@@ -90,7 +91,6 @@ td button.delete  {
 }
 
 section.manipule-sec {
-  height: 100vh;
   flex: 3;
   display: flex;
   justify-content: space-around;
